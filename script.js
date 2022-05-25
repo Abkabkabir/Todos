@@ -51,6 +51,23 @@ function showEditInput(paragraphElement) {
 
 }
 
+function updateTodo() {
+    var editInput = document.getElementsByName("editInput")[0];
+    if (!editInput) {
+        return;
+    }
+
+    var newText = editInput.value;
+
+    if (newText !== "") {
+        var paragraph = editInput.parentElement.querySelector(".paragraph");
+        paragraph.textContent = newText;
+    }
+
+    editInput.remove();
+
+}
+
 function removeTodo(removeElement) {
     removeElement.parentElement.remove();
 }
@@ -65,6 +82,8 @@ function toggleComplete(inputElement) {
 }
 
 list.addEventListener("click", function(event) {
+
+    event.stopImmediatePropagation();
 
     switch (event.target.tagName) {
         case "p":
@@ -83,7 +102,19 @@ list.addEventListener("change", function(event) {
     }
 });
 
-addBtn.addEventListener("click", createTodo);
+list.addEventListener("keypress", function(event) {
+    if (event, targetntagName-- - "INPUT" && event.target.type ===
+        "text" && event.key === "Enter") {
+        updateTodo();
+    }
+})
+
+document.addEventListener("click", updateTodo);
+
+addBtn.addEventListener("click", function(event) {
+    event.stopImmediatePropagation();
+    createTodo();
+});
 
 addInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
