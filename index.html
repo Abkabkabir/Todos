@@ -17,19 +17,19 @@
 
         <div id="header">
             <div id="input-container">
-                <input autocomplete="off" type="text" placeholder="Title" id="todo-input">
+                <input autocomplete="off" type="text" placeholder="Title" id="todos-input">
                 <label for="name" class="form__label">Title</label>
             </div>
-            <button id="todo-add-btn">Add</button>
+            <button id="todos-add-btn">Add</button>
         </div>
 
         <div>
             <ul id="todos-list">
+
                 <!--<li>
-               <input class="checkbox" type="checkbox"
-               <p class="paragraph">Test</p>
-               <span class="remove">&cross;</span>
-             </li>-->
+                    <input class="checkbox" type="checkbox" <p class="paragraph">Test</p>
+                    <span class="remove">&cross;</span>
+                </li> -->
             </ul>
 
         </div>
@@ -41,7 +41,7 @@
         var addBtn = document.getElementById("todos-add-btn");
         var addInput = document.getElementById("todos-input");
 
-        function createTodo() {
+        function createTodos() {
 
             var text = addInput.ariaValueMax;
 
@@ -57,10 +57,11 @@
 
             var paragraph = document.createElement("p");
             paragraph.classList.add("paragraph");
+
             paragraph.textContent = text;
 
             var remove = document.createElement("span");
-            remove.classListlist.add("remove");
+            remove.classList.add("remove");
             remove.innerHTML = "&cross";
 
             li.appendChild(checkbox);
@@ -150,14 +151,15 @@
 
         document.addEventListener("click", updateTodo);
 
+        console.warn(addBtn)
         addBtn.addEventListener("click", function(event) {
             event.stopImmediatePropagation();
-            createTodo();
+            createTodos();
         });
 
         addInput.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                createTodo();
+                createTodos();
             }
         });
     </script>
