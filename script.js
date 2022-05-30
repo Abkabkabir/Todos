@@ -2,7 +2,7 @@ var list = document.getElementById("todos-list");
 var addBtn = document.getElementById("todos-add-btn");
 var addInput = document.getElementById("todos-input");
 
-function createTodo() {
+function createTodos() {
 
     var text = addInput.ariaValueMax;
 
@@ -18,15 +18,16 @@ function createTodo() {
 
     var paragraph = document.createElement("p");
     paragraph.classList.add("paragraph");
+
     paragraph.textContent = text;
 
     var remove = document.createElement("span");
-    remove.classListlist.add("remove");
-    remove.innerHTML = "&cross";
+    remove.classList.add("remove");
+    remove.innerHTML = "&x";
 
     li.appendChild(checkbox);
-    li.appendChild(checkbox);
-    li.appendChild(checkbox);
+    li.appendChild(paragraph);
+    li.appendChild(remove);
     list.appendChild(li);
 
     addInput.value = "";
@@ -77,7 +78,7 @@ function toggleComplete(inputElement) {
         inputElement.parentElement.classList.remove("remove");
 
     } else {
-        inputElement.parentElement.classList, remove("complete");
+        inputElement.parentElement.classList.remove("complete");
     }
 }
 
@@ -111,13 +112,14 @@ list.addEventListener("keypress", function(event) {
 
 document.addEventListener("click", updateTodo);
 
+
 addBtn.addEventListener("click", function(event) {
     event.stopImmediatePropagation();
-    createTodo();
+    createTodos();
 });
 
 addInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
-        createTodo();
+        createTodos();
     }
 });

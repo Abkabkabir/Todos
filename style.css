@@ -20,11 +20,13 @@ input {
 div.container {
     margin: 50px;
     max-width: 500px;
+    color: white;
 }
 
 h1#title {
     text-align: center;
     margin-bottom: 50px;
+    color: blue;
 }
 
 div#header {
@@ -38,7 +40,7 @@ div#header div#input-container {
     padding-top: 15px;
 }
 
-div#header div#input-container input#todo-input {
+div#header div#input-container {
     border: 0;
     border-bottom: 2px solid white;
     outline: 0;
@@ -46,6 +48,18 @@ div#header div#input-container input#todo-input {
     color: white;
     padding: 7px 0;
     background: transparent;
+    transition: border-color 0.2s;
+    letter-spacing: 1.25px;
+}
+
+input#todo-input {
+    border: 10px;
+    border-bottom: 2px solid white;
+    outline: 0;
+    font-size: 50px;
+    color: rgb(148, 246, 148);
+    padding: 7px 0;
+    background: red;
     transition: border-color 0.2s;
     letter-spacing: 1.25px;
 }
