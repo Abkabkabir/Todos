@@ -1,11 +1,9 @@
 var list = document.getElementById("todos-list");
 var addBtn = document.getElementById("todos-add-btn");
-var addInput = document.getElementById("todos-input");
+var addInput = document.getElementById("todo-input");
 
 function createTodos() {
-
-    var text = addInput.ariaValueMax;
-
+    var text = addInput.value;
     if (text == "") {
         return;
     }
@@ -23,7 +21,7 @@ function createTodos() {
 
     var remove = document.createElement("span");
     remove.classList.add("remove");
-    remove.innerHTML = "&x";
+    remove.innerHTML = "&#10007";
 
     li.appendChild(checkbox);
     li.appendChild(paragraph);
@@ -31,8 +29,8 @@ function createTodos() {
     list.appendChild(li);
 
     addInput.value = "";
-
 }
+
 
 function showEditInput(paragraphElement) {
 
@@ -41,18 +39,18 @@ function showEditInput(paragraphElement) {
         editInput.remove();
     }
 
-    var input = document.creatElement("input");
+    var input = document.createElement("input");
     input.type = "text";
     input.name = "editInput";
     input.value = paragraphElement.textContent;
     input.classList.add("editInput");
 
-    paragraphElement.parentElement.appendChild(input);
+    paragraphElement.paragraphElement.appendChild(input);
     input.focus();
-
 }
 
 function updateTodo() {
+
     var editInput = document.getElementsByName("editInput")[0];
     if (!editInput) {
         return;
@@ -63,6 +61,7 @@ function updateTodo() {
     if (newText !== "") {
         var paragraph = editInput.parentElement.querySelector(".paragraph");
         paragraph.textContent = newText;
+
     }
 
     editInput.remove();
@@ -75,48 +74,63 @@ function removeTodo(removeElement) {
 
 function toggleComplete(inputElement) {
     if (inputElement.checked === false) {
-        inputElement.parentElement.classList.remove("remove");
-
-    } else {
         inputElement.parentElement.classList.remove("complete");
+    } else {
+        inputElement.parentElement.classList.add("complete");
     }
+
 }
 
-list.addEventListener("click", function(event) {
+list.addEventListeners("click", function(event) {
 
-    event.stopImmediatePropagation();
+    event.stopPropagation();
+
 
     switch (event.target.tagName) {
-        case "p":
+        case "P":
             showEditInput();
             break;
-        case "SPAN":
-            removeTodo();
-            break;
+        case "SPAN"
+        removeTodo(event.target);
+        break;
     }
 });
 
+
 list.addEventListener("change", function(event) {
-    if (event.target.tagName === "INPUT" && event.target.type ===
-        "checkbox") {
+    if (event.target.tagName === "INPUT" && event.target.type === "checkbox") {
         toggleComplete(event.target);
     }
 });
 
 list.addEventListener("keypress", function(event) {
-    if (event, targetntagName-- - "INPUT" && event.target.type ===
-        "text" && event.key === "Enter") {
+    if (event.target.tagName === "INPUT" && event.target.type === "text" && event.key === "Enter") {
         updateTodo();
     }
-})
 
-document.addEventListener("click", updateTodo);
+});
 
+document.addEventListener("click"
+    updateTodo);
 
 addBtn.addEventListener("click", function(event) {
-    event.stopImmediatePropagation();
+    event.stopPropagation();
     createTodos();
+
 });
+
+
+
+
+list.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        createTodos();
+    }
+});
+
+add
+
+addBtn.addEventListener("click", createTodos);
 
 addInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
