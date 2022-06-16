@@ -1,14 +1,16 @@
 var list = document.getElementById("todos-list");
-var addBtn = document.getElementById("todos-add-btn");
+var addBtn = document.getElementById("todo-add-btn");
 var addInput = document.getElementById("todo-input");
 
 function createTodos() {
     var text = addInput.value;
+
     if (text == "") {
         return;
     }
 
     var li = document.createElement("li");
+    li.classList.add("todo-list-item");
 
     var checkbox = document.createElement("input");
     checkbox.classList.add("checkbox");
@@ -16,7 +18,6 @@ function createTodos() {
 
     var paragraph = document.createElement("p");
     paragraph.classList.add("paragraph");
-
     paragraph.textContent = text;
 
     var remove = document.createElement("span");
@@ -31,9 +32,7 @@ function createTodos() {
     addInput.value = "";
 }
 
-
 function showEditInput(paragraphElement) {
-
     var editInput = document.getElementsByName("editInput")[0];
     if (editInput) {
         editInput.remove();
@@ -50,7 +49,6 @@ function showEditInput(paragraphElement) {
 }
 
 function updateTodo() {
-
     var editInput = document.getElementsByName("editInput")[0];
     if (!editInput) {
         return;
@@ -61,11 +59,9 @@ function updateTodo() {
     if (newText !== "") {
         var paragraph = editInput.parentElement.querySelector(".paragraph");
         paragraph.textContent = newText;
-
     }
 
     editInput.remove();
-
 }
 
 function removeTodo(removeElement) {
@@ -78,57 +74,50 @@ function toggleComplete(inputElement) {
     } else {
         inputElement.parentElement.classList.add("complete");
     }
-
 }
 
-list.addEventListeners("click", function(event) {
-
+list.addEventListener("click", function(event) {
     event.stopPropagation();
 
-
     switch (event.target.tagName) {
-        case "P":
-            showEditInput();
+        case "p":
+            showEditInput(event.target);
             break;
-        case "SPAN"
-        removeTodo(event.target);
-        break;
+        case "SPAN":
+            removeTodo(event.target);
+
+            break;
     }
 });
 
-
 list.addEventListener("change", function(event) {
     if (event.target.tagName === "INPUT" && event.target.type === "checkbox") {
-        toggleComplete(event.target);
+        toggleComplete();
     }
 });
 
 list.addEventListener("keypress", function(event) {
-    if (event.target.tagName === "INPUT" && event.target.type === "text" && event.key === "Enter") {
+    if (
+        event.target.tagName === "INPUT" &&
+        event.target.type === "text" &&
+        event.key === "Enter"
+    ) {
         updateTodo();
     }
-
 });
 
-document.addEventListener("click"
-    updateTodo);
+document.addEventListener("click", updateTodo);
 
 addBtn.addEventListener("click", function(event) {
     event.stopPropagation();
     createTodos();
-
 });
-
-
-
 
 list.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         createTodos();
     }
 });
-
-add
 
 addBtn.addEventListener("click", createTodos);
 
